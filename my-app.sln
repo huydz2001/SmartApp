@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "node_modules", "node_modules", "{1104874B-EF76-4E4C-831E-06B7C8FA669A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lottie-react-native", "lottie-react-native", "{5F75AC5C-264D-4A2A-AF76-5998A826D8B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EEA0162C-AE5D-4BAE-A1DD-BA31E20B7AE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "windows", "windows", "{EA31220C-8BAE-4CA2-B252-82E727D9F03D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LottieReactNativeWindows", "node_modules\lottie-react-native\src\windows\LottieReactNativeWindows\LottieReactNativeWindows.csproj", "{D0F763E4-6530-4D91-B0D3-B2C731B12B86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0F763E4-6530-4D91-B0D3-B2C731B12B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F763E4-6530-4D91-B0D3-B2C731B12B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F763E4-6530-4D91-B0D3-B2C731B12B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F763E4-6530-4D91-B0D3-B2C731B12B86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F75AC5C-264D-4A2A-AF76-5998A826D8B2} = {1104874B-EF76-4E4C-831E-06B7C8FA669A}
+		{EEA0162C-AE5D-4BAE-A1DD-BA31E20B7AE2} = {5F75AC5C-264D-4A2A-AF76-5998A826D8B2}
+		{EA31220C-8BAE-4CA2-B252-82E727D9F03D} = {EEA0162C-AE5D-4BAE-A1DD-BA31E20B7AE2}
+		{D0F763E4-6530-4D91-B0D3-B2C731B12B86} = {EA31220C-8BAE-4CA2-B252-82E727D9F03D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D06C2059-8F99-4E68-8598-067FD32A870A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+export const ActionsTypes = {
+    FETCH_USERS: "FETCH_USERS",
+    SET_USER : "SET_USER",
+    REMOVE_USER : "REMOVE_SELECTED_USER",
+    UPDATE_IMAGE: "UPDATE_IMAGE"
+}
