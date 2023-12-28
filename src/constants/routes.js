@@ -9,13 +9,21 @@ export default {
 
     CHAT : 'Chat',
     PROFILE: 'Profile',
-    TASK: 'Task',
+    SCHEDULE: 'Schedule',
     VERIFY: 'Verification',
 
     JOINHOME : 'JoinHome',
     CREATEHOME : 'CreateHome',
     NOTJOIN : 'NotJoin',
     JOINED : 'Joined',
+    HOMEDETAILS: 'HomeDetails',
+    EDITPROFILE: "EditProfile",
+    ADDTASK: "AddTask",
 
-    URL: "https://1092-2a09-bac5-d45c-e6-00-17-202.ngrok-free.app/resources/"
+    URL: "https://54fd-2a09-bac1-7a80-50-00-246-8c.ngrok-free.app",
+    URL_IMAGE_USER: "https://54fd-2a09-bac1-7a80-50-00-246-8c.ngrok-free.app/resources/users/",
+    URL_IMAGE_HOME: "https://54fd-2a09-bac1-7a80-50-00-246-8c.ngrok-free.app/resources/homes/"
+
+
+    
 }

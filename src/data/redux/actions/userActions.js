@@ -12,7 +12,6 @@ export const fetchUsers = () => async (dispatch) => {
     const token = await AsyncStorage.getItem("AccessToken");
     const decodedToken = jwtDecode(token);
     await getUserById(decodedToken.UserId).then((result) => {
-        console.log(result.data)
         const { userId, name, age, contact, dob, image, role } = result.data;
         const { email, phone } = contact;
         const infor = {
@@ -37,24 +36,25 @@ export const setUser = (user) => {
     }
 }
 
+export const deleteUser = () => {
+    return {
+        type: ActionsTypes.REMOVE_USER,
+        payload: null
+    }
+}
+
 export const updateImage = (newImage) => async (dispatch) => {
     try {
         const token = await AsyncStorage.getItem("AccessToken");
         const decodedToken = jwtDecode(token)
         await saveImage(newImage, decodedToken.UserId)
             .then((result) => {
-                dispatch({type: ActionsTypes.UPDATE_IMAGE, payload: result.data})
+                dispatch({type: ActionsTypes.UPDATE_IMAGE, payload: result.data.toString()})
             })
     }
     catch(error){
         console.log(error)
     }
-
-    // console.log("new image", newImage)
-    // return {
-    //     type: ActionsTypes.UPDATE_IMAGE,
-    //     payload: newImage
-    // }
 }
 
 

@@ -10,26 +10,36 @@ import {
 import filter from "lodash.filter";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import DisplayUserComponent from "./DisplayUserComponent";
+import DisplayUserAddComponent from "./DisplayUserAddComponent";
+import { getUsers } from "../api/userAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { addMemberStore } from "../data/redux/actions/homeActions";
 
 const AddUserComponent = (props) => {
-  const {addUserToList} = props;
+  const {homeId,closeBottomSheet} = props;
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
   const [fullData, setFullData] = useState([]);
 
-  const API_ENDPOINT = `https://randomuser.me/api/?results=20`;
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetechData(API_ENDPOINT);
+    fetechData();
   }, []);
 
+  const addMember = async (member) => {
+    dispatch(addMemberStore(homeId, member))
+    closeBottomSheet()
+  }
+
   // call api get data
-  const fetechData = async (url) => {
+  const fetechData = async () => {
     try {
-      const reponse = await fetch(url);
-      const json = await reponse.json();
-      setData(json.results);
-      setFullData(json.results);
+      await getUsers().then((result => {
+        setData(result.data);
+        setFullData(result.data);
+      }))
+
     } catch (error) {
       console.log(error);
     }
@@ -38,27 +48,20 @@ const AddUserComponent = (props) => {
   // handle input search
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const formattedQuery = query.toLowerCase();
     const filterData = filter(fullData, (user) => {
-      return contains(user.name.first, formattedQuery);
+      return contains(user.contact.phone, query);
     });
     setData(filterData);
   };
 
   // check query to search
-  const contains = (name, query) => {
-    if (name.toLowerCase().includes(query)) {
+  const contains = (phone, query) => {
+    if(phone.includes(query)) {
       return true;
     }
 
     return false;
   };
-
-
-  const addUser = (userId) =>{
-    addUserToList(userId);
-  }
-
 
   return (
     <View className="m-0 w-full h-full absolute flex pt-6 px-6">
@@ -70,21 +73,21 @@ const AddUserComponent = (props) => {
           autoCorrect={false}
           className="p-3 rounded-lg mt-3 w-full"
           style={{ borderColor: "#ccc", borderWidth: 1 }}
-          placeholder="Search your home"
+          placeholder="Search by phone"
           value={searchQuery}
           onChangeText={(query) => handleSearch(query)}
         />
 
         {searchQuery != "" && (
-          <View className="mt-3 max-h-100">
+          <View className="mt-3 max-h-[350px] h-[350px]">
             <FlatList
-              className="max-h-40"
+              className="max-h-[350px]"
               showsVerticalScrollIndicator={false}
               data={data}
-              keyExtractor={(item) => item.login.username}
+              keyExtractor={(item,index) => item.userId}
               renderItem={({ item }) => (
                 <View>
-                  <DisplayUserComponent user={item} addUser={addUser} />
+                  <DisplayUserAddComponent homeId={homeId} user={item} addMember={addMember}/>
                 </View>
               )}
             />

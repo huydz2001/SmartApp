@@ -1,12 +1,13 @@
 import axios from "axios";
 import { interceptors } from "react-native-axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import routes from "../constants/routes";
 
 
 
 
 const ApiManagment = axios.create({
-    baseURL: 'https://1092-2a09-bac5-d45c-e6-00-17-202.ngrok-free.app/api',
+    baseURL: `${routes.URL}/api`,
     responseEncoding: 'json',
     withCredentials: true,
 })
@@ -14,7 +15,7 @@ const ApiManagment = axios.create({
 ApiManagment.interceptors.request.use(
     async function (config) {
         const accessToken = await AsyncStorage.getItem("AccessToken")
-        config.headers['Authorization'] = `Bear ${accessToken}`;
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
         return config;
     },
     function (error) {

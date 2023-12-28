@@ -19,21 +19,18 @@ const SplashScreen = () => {
     useEffect(() => {
         setTimeout(() => {
             handleGetToken();
-        }, 3000);
+        }, 1500);
     }, []);
 
     const handleGetToken = async () => {
-        AsyncStorage.clear()
         const dataToken = await AsyncStorage.getItem("AccessToken")
         if (!dataToken) {
             axios.defaults.headers.common['Authorization'] = "";
             navigation.navigate(routes.LOGIN)
         }
         else {
-            axios.defaults.headers.common['Authorization'] = `Bear ${dataToken}`;
-            const user = await AsyncStorage.getItem("User");
-            console.log(user)
-            navigation.navigate(routes.BTNBOTTOM, {user: user})
+            axios.defaults.headers.common['Authorization'] = `Bearer ${dataToken}`;
+            navigation.navigate(routes.BTNBOTTOM)
         }
     }
 

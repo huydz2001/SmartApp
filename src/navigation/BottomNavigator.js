@@ -3,36 +3,26 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ChatScreen from '../screens/home/ChatScreen';
 import ProfileScreen from '../screens/home/ProfileScreen';
-import TasksScreen from '../screens/home/TasksScreen';
+import ScheduleScreen from '../screens/home/ScheduleScreen';
 import HomeScreen from '../screens/home/HomeScreen';
 import routes from '../constants/routes';
 import { Message, Profile, Home, TaskSquare } from 'iconsax-react-native';
 import BtnBottomComponent from '../components/btnBottomComponent';
 import { styles } from '../assets/styles/global';
-import NotjoinComponent from '../components/NotjoinComponent';
-import JoindedComponent from '../components/JoindedComponent';
-import { getUserById } from "../api/userAPI";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { decode } from "base-64";
 global.atob = decode;
-import { setUser, fetchUsers } from '../data/redux/actions/userActions'
-import { jwtDecode } from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
+
 
 
 
 export default function BottomNavigator() {
 
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(fetchUsers());
-    // }, [])
-
-
     const Tabs = createBottomTabNavigator();
 
     return (
         <Tabs.Navigator
+            initialRouteName={routes.HOME}
+            backBehavior="none"
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: false,
@@ -52,11 +42,11 @@ export default function BottomNavigator() {
                             </BtnBottomComponent>
                         )
                     }
-                    else if (route.name === routes.TASK) {
+                    else if (route.name === routes.SCHEDULE) {
                         return (
                             <BtnBottomComponent localStyles={{ backgroundColor: focused ? '#c6e3eb' : '#fff' }}>
                                 <TaskSquare size={size} color={focused ? "#4c4d4d" : "#676767"} />
-                                {focused && <Text style={styles.tabLabel}>Tasks</Text>}
+                                {focused && <Text style={styles.tabLabel}>Schedule</Text>}
                             </BtnBottomComponent>
                         )
                     }
@@ -79,7 +69,7 @@ export default function BottomNavigator() {
                 }
             })}>
             <Tabs.Screen name={routes.HOME} component={HomeScreen} options={{ headerTitle: "Home" }} />
-            <Tabs.Screen name={routes.TASK} component={TasksScreen} options={{ headerTitle: "Tasks" }} />
+            <Tabs.Screen name={routes.SCHEDULE} component={ScheduleScreen} options={{ headerTitle: "Schedule" }} />
             <Tabs.Screen name={routes.CHAT} component={ChatScreen} options={{ headerTitle: "Chat" }} />
             <Tabs.Screen name={routes.PROFILE} component={ProfileScreen} options={{ headerTitle: "Profile" }} />
         </Tabs.Navigator>

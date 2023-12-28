@@ -11,6 +11,9 @@ import JoinFamilyScreen from '../screens/family/JoinFamilyScreen';
 import CreateFamilyHome from '../screens/family/CreateFamilyScreen';
 import { Provider } from "react-redux";
 import store from '../data/redux/store'
+import DetailsFamilyScreen from '../screens/family/DetailsFamilyScreen';
+import EditProfileScreen from '../screens/home/EditProfileScreen';
+import AddNewTask from '../screens/home/AddScheduleScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +27,10 @@ function AppNaviagtion() {
                 <Stack.Screen name={routes.VERIFY} component={Verification} />
                 <Stack.Screen name={routes.JOINHOME} component={JoinFamilyScreen} />
                 <Stack.Screen name={routes.CREATEHOME} component={CreateFamilyHome} />
+                <Stack.Screen name={routes.HOMEDETAILS} component={DetailsFamilyScreen} />
                 <Stack.Screen name={routes.BTNBOTTOM} component={BottomNavigator} />
+                <Stack.Screen name={routes.EDITPROFILE} component={EditProfileScreen} />
+                <Stack.Screen name={routes.ADDTASK} component={AddNewTask} />
             </Stack.Navigator>
         </Provider>
     );

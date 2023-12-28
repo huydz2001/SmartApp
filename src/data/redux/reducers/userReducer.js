@@ -28,12 +28,28 @@ export const userReducer = (state = initialSate, { type, payload }) => {
                 user: payload
             }
             break
+        case ActionsTypes.REMOVE_USER:
+            return {
+                ...state,
+                user: {
+                    id: "",
+                    name: "",
+                    phone: "",
+                    dob: "",
+                    image: "",
+                    age: "",
+                    emai: "",
+                    role: "",
+                }
+            }
+            break
+
         case ActionsTypes.UPDATE_IMAGE:
             return {
                 ...state,
                 user: {
                     ...state.user,
-                    image: payload.image
+                    image: payload
                 }
             }
             break

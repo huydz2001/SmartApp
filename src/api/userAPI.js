@@ -1,7 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import ApiManagment from "./apiManagment";
-import * as FileSystem from 'expo-file-system';
 
+import ApiManagment from "./apiManagment";
 
 export const user_login = async (data) => {
     try {
@@ -11,6 +9,37 @@ export const user_login = async (data) => {
                 'Content-Type': "application/json"
             },
             data: data
+        })
+        return result
+    }
+    catch (error) {
+        return error
+    }
+}
+
+export const getUserByPhone= async (phone) => {
+    try {
+        const result = await ApiManagment(`/User/${phone}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: phone
+        })
+        return result
+    }
+    catch (error) {
+        return error
+    }
+}
+
+export const getUsers= async () => {
+    try {
+        const result = await ApiManagment(`/User`, {
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json"
+            }
         })
         return result
     }
@@ -56,4 +85,19 @@ export const saveImage = async (uri, id) => {
         console.log(error)
     }
 
+}
+
+export const getHomeByUserId = async (id) => {
+    try {
+        const result = await ApiManagment(`/User/${id}/getHome`, {
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json"
+            },
+        })
+        return result
+    }
+    catch (error) {
+        return error
+    }
 }

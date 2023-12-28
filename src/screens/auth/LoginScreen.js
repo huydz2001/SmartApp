@@ -17,6 +17,10 @@ import userAPI, { user_login, getUserById } from "../../api/userAPI";
 import { decode } from "base-64";
 global.atob = decode;
 import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "../../data/redux/actions/userActions";
+import placeholder from "../../assets/images/avatar.jpg"
+import { fetchHome } from "../../data/redux/actions/homeActions";
 
 
 
@@ -35,6 +39,8 @@ export default function LoginScreen() {
     setInputs((prev) => ({ ...prev, [input]: text }));
   };
 
+  const dispatch = useDispatch();
+
 
   const Login = async () => {
     try {
@@ -43,7 +49,12 @@ export default function LoginScreen() {
           if (result.status == 200) {
             AsyncStorage.setItem("AccessToken", result.data.data.accessToken)
             AsyncStorage.setItem("RefreshToken", result.data.data.refreshToken)
-            navigation.navigate(routes.BTNBOTTOM)
+            dispatch(fetchUsers())
+            dispatch(fetchHome())
+            alert("Login Success")
+            setTimeout(() => {
+              navigation.navigate(routes.BTNBOTTOM)
+            },1000)
           }
           else {
             alert("Sai tai khoan hoac mat khau")

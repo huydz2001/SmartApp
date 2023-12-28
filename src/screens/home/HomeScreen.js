@@ -7,7 +7,7 @@ import {
     SafeAreaView
 } from "react-native";
 
-import { Notification } from "iconsax-react-native";
+import { CloudChange, Notification } from "iconsax-react-native";
 import JoindedComponent from "../../components/JoindedComponent";
 import NotjoinComponent from "../../components/NotjoinComponent";
 import { decode } from "base-64";
@@ -15,20 +15,28 @@ global.atob = decode;
 import routes from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../data/redux/actions/userActions";
+import placeholder from "../../assets/images/avatar.jpg"
+import { fetchHome } from "../../data/redux/actions/homeActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function HomeScreen() {
 
-    const user = useSelector((state) => state.userInfor.user)
-    const [imageUrl, setImageUrl] = useState()
     const dispatch = useDispatch();
-    // dispatch(fetchUsers())
+    const user = useSelector((state) => state.userInfor.user);
+    const home = useSelector((state) => state.homeInfor.home);
+    const [imageUrl, setImageUrl] = useState(null);
 
     useEffect(() => {
         dispatch(fetchUsers())
-        setImageUrl(`${routes.URL}${user.image}`)
-    },[user.image])
+        dispatch(fetchHome())
+    }, [])
 
-    const [isJoin, setIsJoin] = useState(false);
+    useEffect(() => {
+        if (user) {
+            setImageUrl(`${routes.URL_IMAGE_USER}${user.image}`);
+        }
+    }, [user]);
+
     return (
         <View className="flex-1 m-0 bg-white px-3">
             <SafeAreaView className="flex container">
@@ -36,7 +44,7 @@ export default function HomeScreen() {
                     <View className="mt-3 flex-row items-center">
                         <Image
                             className="rounded-2xl"
-                            source={{ uri: imageUrl }}
+                            source={user.image ? { uri: imageUrl } : placeholder}
                             style={{ width: 60, height: 60 }}
                         />
                         <View className="ml-4">
@@ -50,11 +58,9 @@ export default function HomeScreen() {
                 </View>
             </SafeAreaView>
             <View className="">
-                {isJoin ? <JoindedComponent /> : <NotjoinComponent />}
+                {user.role != 0 && home.members ? <JoindedComponent home={home} /> : <NotjoinComponent />}
             </View>
         </View>
-
-    );
-
+    )
 
 }
